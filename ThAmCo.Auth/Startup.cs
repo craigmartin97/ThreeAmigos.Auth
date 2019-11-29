@@ -70,7 +70,7 @@ namespace ThAmCo.Auth
                     .AddJwtBearer("thamco_account_api", options =>
                     {
                         options.Audience = "thamco_account_api";
-                        options.Authority = "https://localhost:5099";
+                        options.Authority = "https://localhost:44387/";
                     });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
