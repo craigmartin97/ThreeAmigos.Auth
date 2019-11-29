@@ -27,7 +27,7 @@ namespace ThAmCo.Auth
             {
                 new ApiResource("thamco_account_api", "ThAmCo Account Management"),
 
-                new ApiResource("staffmanagement_api","Staff management api")
+                new ApiResource("staff_api","Staff management api")
                 {
                     UserClaims = { "name","role" }
                 }
@@ -55,7 +55,7 @@ namespace ThAmCo.Auth
                 },
                 new Client
                 {
-                    ClientId = "staffmanagement_api",
+                    ClientId = "staff_api",
                     ClientName = "Staff management api",
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets =
