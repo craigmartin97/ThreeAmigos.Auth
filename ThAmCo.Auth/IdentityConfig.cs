@@ -43,6 +43,21 @@ namespace ThAmCo.Auth
             {
                 new Client
                 {
+                    ClientId = "staff_api",
+                    ClientName = "Staff management api",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials, 
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedScopes =
+                    {
+                        "thamco_account_api"
+                    },
+                    RequireConsent = false
+                },
+                new Client
+                {
                     ClientId = "threeamigos_app",
                     ClientName = "Staff management front end",
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
@@ -54,22 +69,9 @@ namespace ThAmCo.Auth
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         "thamco_account_api",
+                        "profile",
+                        "staff_api",
                         "roles"
-                    },
-                    RequireConsent = false
-                },
-                new Client
-                {
-                    ClientId = "staff_api",
-                    ClientName = "Staff management api",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets =
-                    {
-                        new Secret("secret".Sha256())
-                    },
-                    AllowedScopes =
-                    {
-                        "thamco_account_api"
                     },
                     RequireConsent = false
                 }
