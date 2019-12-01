@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using IdentityServer4;
 using IdentityServer4.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 
 namespace ThAmCo.Auth
@@ -15,9 +17,7 @@ namespace ThAmCo.Auth
 
                 new IdentityResources.Profile(),
 
-                new IdentityResource(name: "roles",
-                                     displayName: "ThAmCo Application Roles",
-                                     claimTypes: new [] { "role" })
+                new IdentityResource("roles", new[]{ "role"})
             };
         }
 
@@ -36,20 +36,25 @@ namespace ThAmCo.Auth
 
         public static IEnumerable<Client> GetIdentityClients(this IConfiguration configuration)
         {
+            /**
+             * Craig Martin Q5031372 Added clients to access oauth server
+             */
             return new[]
             {
                 new Client
                 {
                     ClientId = "threeamigos_app",
                     ClientName = "Staff management front end",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPasswordAndClientCredentials,
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
                     },
                     AllowedScopes =
                     {
-                        "thamco_account_api"
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        "thamco_account_api",
+                        "roles"
                     },
                     RequireConsent = false
                 },

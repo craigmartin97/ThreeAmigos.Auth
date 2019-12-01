@@ -27,7 +27,7 @@ namespace ThAmCo.Auth.Data.Account
             };
             foreach (var user in users)
             {
-                await userManager.CreateAsync(user, "Password1_");
+                await userManager.CreateAsync(user, ".Password123");
                 // auto confirm email addresses for test users
                 var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 await userManager.ConfirmEmailAsync(user, token);

@@ -184,6 +184,12 @@ namespace ThAmCo.Auth.Data.Account.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName", "Descriptor" },
                 values: new object[] { "56b4ca14-43a0-4281-b5b7-6e73e400cf82", "438580ab-bb4a-4f5c-bb00-49729fef9966", "AppRole", "Staff", "STAFF", "ThAmCo Staff Members" });
 
+            migrationBuilder.InsertData(
+                schema: "account",
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Discriminator", "Name", "NormalizedName", "Descriptor" },
+                values: new object[] { "27b18343-ec51-406e-b529-a46c236c0a7a", "aee2b18a-e224-4a0e-9c78-d37bc825ba66", "AppRole", "Customer", "CUSTOMER", "ThAmCo Customers" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 schema: "account",
