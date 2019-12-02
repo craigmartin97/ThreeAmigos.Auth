@@ -22,6 +22,11 @@ namespace ThAmCo.Auth
                 if (env.IsDevelopment())
                 {
                     var context = services.GetRequiredService<AccountDbContext>();
+
+                    //if (env.IsDevelopment()) // if dev, delete the database as its on localdb
+                    //{
+                    //    context.Database.EnsureDeleted(); // delete the database each time and refresh data.
+                    //}
                     context.Database.Migrate();
                     try
                     {
