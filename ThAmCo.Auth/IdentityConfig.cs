@@ -29,7 +29,7 @@ namespace ThAmCo.Auth
 
                 new ApiResource("staff_api","Staff management api")
                 {
-                    UserClaims = { "name","role" }
+                    UserClaims = { "name","role" } // maybe add data here? should it be ro;es?
                 }
             };
         }
