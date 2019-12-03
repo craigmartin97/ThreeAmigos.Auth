@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ThAmCo.Auth.Data.Account;
 using ThAmCo.Auth.Models;
 
@@ -25,10 +22,21 @@ namespace ThAmCo.Auth.Controllers
         }
 
         [HttpGet("api/users")]
-        public async Task<IActionResult> GetUsers([FromQuery] string role = null)
+        public async Task<IActionResult> GetUsers([FromQuery] string[] roles = null)
         {
-            var users = string.IsNullOrEmpty(role) ? UserManager.Users.ToList()
-                                                   : await UserManager.GetUsersInRoleAsync(role);
+            List<AppUser> users = new List<AppUser>();
+            if ((roles != null) && roles.Count() > 0)
+            {
+                foreach (string role in roles)
+                {
+                    users.AddRange(await UserManager.GetUsersInRoleAsync(role));
+                }
+            }
+            else
+            {
+                users = UserManager.Users.ToList();
+            }
+
             var dto = users.Select(u => new UserSummaryGetDto
             {
                 Id = u.Id,
