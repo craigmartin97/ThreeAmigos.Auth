@@ -13,9 +13,18 @@ namespace ThAmCo.Auth
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             Configuration = configuration;
+
+            if(!hostingEnvironment.IsDevelopment()) // is live, get live string
+            {
+                // setting up adding secrets
+                var b = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath)
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                b.AddUserSecrets<Startup>();
+                Configuration = b.Build();
+            }
         }
 
         private IConfiguration Configuration { get; }
