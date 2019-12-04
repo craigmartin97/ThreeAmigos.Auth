@@ -20,6 +20,7 @@ namespace ThAmCo.Auth.Data.Account
 
             RandomWordsGenerator fn = new RandomWordsGenerator("https://raw.githubusercontent.com/dominictarr/random-name/master/first-names.txt");
             RandomWordsGenerator ln = new RandomWordsGenerator("https://raw.githubusercontent.com/arineng/arincli/master/lib/last-names.txt");
+            RandomStringGenerator phone = new RandomStringGenerator();
 
             var userManager = services.GetRequiredService<UserManager<AppUser>>();
             Random random = new Random();
@@ -32,15 +33,21 @@ namespace ThAmCo.Auth.Data.Account
 
             for (int i = 0; i < 500; i++)
             {
+                string role = levels[random.Next(levels.Length)];
+
                 string firstName = fn.GetWord();
                 string lastName = ln.GetWord();
+
+
                 AppUser user = new AppUser()
                 {
                     Email = firstName + lastName + "@example.com",
                     UserName = firstName + lastName + "@example.com",
                     FullName = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(firstName)
                     + " " +
-                    System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(lastName)
+                    System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(lastName),
+                    PhoneNumber = role.Equals("Admin") || role.Equals("Staff") ?
+                    "07" + phone.GenerateRandomString(9, "0123456789") : null
                 };
 
                 await userManager.CreateAsync(user, ".Password123");
@@ -49,13 +56,15 @@ namespace ThAmCo.Auth.Data.Account
                 await userManager.ConfirmEmailAsync(user, token);
 
 
-                await userManager.AddToRoleAsync(user, levels[random.Next(levels.Length)]);
+                await userManager.AddToRoleAsync(user, role);
             }
 
 
             AppUser[] users = {
-                    new AppUser { UserName = "admin@example.com", Email = "admin@example.com", FullName = "Example Admin User" },
-                    new AppUser { UserName = "staff@example.com", Email = "staff@example.com", FullName = "Example Staff User" },
+                    new AppUser { UserName = "admin@example.com", Email = "admin@example.com", FullName = "Example Admin User",
+                    PhoneNumber = "07" + phone.GenerateRandomString(9, "0123456789") },
+                    new AppUser { UserName = "staff@example.com", Email = "staff@example.com", FullName = "Example Staff User",
+                    PhoneNumber = "07" + phone.GenerateRandomString(9, "0123456789")},
                     new AppUser { UserName = "bob@example.com", Email = "bob@example.com", FullName = "Robert 'Bobby' Robertson" },
                     new AppUser { UserName = "betty@example.com", Email = "betty@example.com", FullName = "Bethany 'Betty' Roberts"  }
                 };

@@ -42,6 +42,7 @@ namespace ThAmCo.Auth.Controllers
                 Id = u.Id,
                 UserName = u.UserName,
                 Email = u.Email,
+                PhoneNumber = u.PhoneNumber, // Added Craig Martin
                 FullName = u.FullName
             });
             return Ok(dto);
@@ -68,6 +69,7 @@ namespace ThAmCo.Auth.Controllers
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber, // Added Craig Martin
                 FullName = user.FullName,
                 Roles = roles
             };
@@ -87,7 +89,8 @@ namespace ThAmCo.Auth.Controllers
             {
                 Email = newUser.Email,
                 FullName = newUser.FullName,
-                UserName = newUser.Email
+                UserName = newUser.Email,
+                PhoneNumber = newUser.PhoneNumber // Craig Martin - Added phone number
             };
 
             var result = await UserManager.CreateAsync(user, newUser.Password);
@@ -106,6 +109,7 @@ namespace ThAmCo.Auth.Controllers
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber, // Craig Martin - Added phone number
                 FullName = user.FullName,
                 Roles = roles
             };
@@ -152,8 +156,9 @@ namespace ThAmCo.Auth.Controllers
             }
 
             user.Email = updatedUser.Email ?? user.Email;
-            // Craig Martin 04-12-19 -- Altering username on update
+            // Craig Martin 04-12-19 -- Altering username on update, and phone number
             user.UserName = updatedUser.Email ?? user.Email;
+            user.PhoneNumber = updatedUser.PhoneNumber ?? user.PhoneNumber;
 
             user.FullName = updatedUser.FullName ?? user.FullName;
 
@@ -180,6 +185,7 @@ namespace ThAmCo.Auth.Controllers
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
                 FullName = user.FullName,
                 Roles = roles
             };
