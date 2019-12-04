@@ -152,6 +152,9 @@ namespace ThAmCo.Auth.Controllers
             }
 
             user.Email = updatedUser.Email ?? user.Email;
+            // Craig Martin 04-12-19 -- Altering username on update
+            user.UserName = updatedUser.Email ?? user.Email;
+
             user.FullName = updatedUser.FullName ?? user.FullName;
 
             await UserManager.UpdateAsync(user);
