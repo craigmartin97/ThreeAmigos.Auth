@@ -15,16 +15,21 @@ namespace ThAmCo.Auth
     {
         public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
-            Configuration = configuration;
+            //Configuration = configuration;
 
-            if(!hostingEnvironment.IsDevelopment()) // is live, get live string
+            var b = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath);
+            if (hostingEnvironment.IsDevelopment())
             {
-                // setting up adding secrets
-                var b = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath)
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-                b.AddUserSecrets<Startup>();
-                Configuration = b.Build();
+                b.AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json",
+                    optional: false, reloadOnChange: true);
             }
+            else
+            {
+                b.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddUserSecrets<Startup>();
+            }
+
+            Configuration = b.Build();
         }
 
         private IConfiguration Configuration { get; }
@@ -36,6 +41,8 @@ namespace ThAmCo.Auth
                 Configuration.GetConnectionString("AccountConnection"),
                 x => x.MigrationsHistoryTable("__EFMigrationsHistory", "account")
             ));
+
+            var s = Configuration.GetConnectionString("AccountConnection");
 
             // configure Identity account management
             services.AddIdentity<AppUser, AppRole>()

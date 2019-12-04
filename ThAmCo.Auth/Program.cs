@@ -19,24 +19,23 @@ namespace ThAmCo.Auth
             {
                 var services = scope.ServiceProvider;
                 var env = services.GetRequiredService<IHostingEnvironment>();
-                if (env.IsDevelopment())
-                {
-                    var context = services.GetRequiredService<AccountDbContext>();
 
-                    //if (env.IsDevelopment()) // if dev, delete the database as its on localdb
-                    //{
-                    //    context.Database.EnsureDeleted(); // delete the database each time and refresh data.
-                    //}
-                    context.Database.Migrate();
-                    try
-                    {
-                        AccountDbInitialiser.SeedTestData(context, services).Wait();
-                    }
-                    catch (Exception)
-                    {
-                        var logger = services.GetRequiredService<ILogger<Program>>();
-                        logger.LogDebug("Seeding test account data failed.");
-                    }
+                var context = services.GetRequiredService<AccountDbContext>();
+
+                if (env.IsDevelopment()) // if dev, delete the database as its on localdb
+                {
+                    context.Database.EnsureDeleted(); // delete the database each time and refresh data.
+                }
+
+                context.Database.Migrate();
+                try
+                {
+                    AccountDbInitialiser.SeedTestData(context, services).Wait();
+                }
+                catch (Exception)
+                {
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogDebug("Seeding test account data failed.");
                 }
             }
 
