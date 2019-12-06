@@ -15,7 +15,7 @@ namespace ThAmCo.Auth
     {
         public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
-            //Configuration = configuration;;
+            //Configuration = configuration;
 
             var b = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath);
             if (hostingEnvironment.IsDevelopment())
