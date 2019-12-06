@@ -28,7 +28,8 @@
           "IdentityServer4.AspNetIdentity": "2.5.3",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
-          "Microsoft.NETCore.App": "2.2.0"
+          "Microsoft.NETCore.App": "2.2.0",
+          "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": "1.9.5"
         },
         "runtime": {
           "ThAmCo.Auth.dll": {}
@@ -108,6 +109,7 @@
           "lib/netstandard2.0/IdentityServer4.Storage.dll": {}
         }
       },
+      "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.9.5": {},
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2",
@@ -3337,6 +3339,13 @@
       "sha512": "sha512-HPAqy1EeX2EE5pMnxKZraJwwB31WYw3txHF2w7/YHt8wWLNvB84f+mKthOqjLuVI8dpp/xVwj/n6pUSRcSDPuQ==",
       "path": "identityserver4.storage/2.5.3",
       "hashPath": "identityserver4.storage.2.5.3.nupkg.sha512"
+    },
+    "Microsoft.VisualStudio.Azure.Containers.Tools.Targets/1.9.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rSZX0aAxacegOntSNMUO3rkM9ocp5jrnaM7xdzhBn3OB5XN1aFHDhoXhCswSlXwGnHmIAMxNSfLsCh9bWOnTzw==",
+      "path": "microsoft.visualstudio.azure.containers.tools.targets/1.9.5",
+      "hashPath": "microsoft.visualstudio.azure.containers.tools.targets.1.9.5.nupkg.sha512"
     },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "type": "package",
