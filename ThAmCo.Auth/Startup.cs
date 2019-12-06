@@ -15,21 +15,21 @@ namespace ThAmCo.Auth
     {
         public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
-            //Configuration = configuration;
+            Configuration = configuration;
 
             var b = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath);
             if (hostingEnvironment.IsDevelopment())
             {
                 b.AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json",
                     optional: false, reloadOnChange: true);
+                Configuration = b.Build();
             }
-            else
+            else if(hostingEnvironment.IsStaging())
             {
                 b.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .AddUserSecrets<Startup>();
+                Configuration = b.Build();
             }
-
-            Configuration = b.Build();
         }
 
         private IConfiguration Configuration { get; }
