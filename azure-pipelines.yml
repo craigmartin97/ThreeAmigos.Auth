@@ -21,9 +21,12 @@ stages:
       vmImage: 'ubuntu-latest'
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build an image for ThreeAmigosAuth and push to container registry 
       inputs:
-        command: build
+        command: buildAndPush
+        repository: ThreeAmigosAuth
         dockerfile: '**/Dockerfile'
+        containerRegistry: ThreeAmigosStaffManagement
         tags: |
-          $(tag)
+          $(Build.BuildId)
+          latest
