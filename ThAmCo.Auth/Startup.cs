@@ -13,26 +13,29 @@ namespace ThAmCo.Auth
 {
     public class Startup
     {
+        private IConfiguration Configuration { get; }
+
+        private IHostingEnvironment env;
+
         public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
+            env = hostingEnvironment;
             Configuration = configuration;
 
             var b = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath);
-            if (hostingEnvironment.IsDevelopment())
+            if (hostingEnvironment.IsDevelopment()) // use local db
             {
                 b.AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json",
                     optional: false, reloadOnChange: true);
                 Configuration = b.Build();
             }
-            else if(hostingEnvironment.IsStaging())
+            else if (hostingEnvironment.IsStaging()) // if staging, so debuging live db
             {
                 b.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                     .AddUserSecrets<Startup>();
                 Configuration = b.Build();
             }
         }
-
-        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -77,11 +80,15 @@ namespace ThAmCo.Auth
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
+            // if development or staging then use localhost else use live server.
+            string authority = env.IsDevelopment() || env.IsStaging() ? "https://localhost:44387/" :
+                "https://threeamigosauth.azurewebsites.net";
+
             services.AddAuthentication()
                     .AddJwtBearer("thamco_account_api", options =>
                     {
                         options.Audience = "thamco_account_api";
-                        options.Authority = "https://localhost:44387/";
+                        options.Authority = authority;
                     });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
@@ -117,7 +124,7 @@ namespace ThAmCo.Auth
 
             // use IdentityServer middleware during HTTP requests
             app.UseIdentityServer();
-            
+
             app.UseMvc();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -32,8 +33,9 @@ namespace ThAmCo.Auth
                 {
                     AccountDbInitialiser.SeedTestData(context, services).Wait();
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Debug.WriteLine(ex.Message + "  " + ex.InnerException);
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogDebug("Seeding test account data failed.");
                 }
