@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using IdentityServer4;
+﻿using IdentityServer4;
 using IdentityServer4.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 
 namespace ThAmCo.Auth
 {
@@ -45,7 +43,7 @@ namespace ThAmCo.Auth
                 {
                     ClientId = "staff_api",
                     ClientName = "Staff management api",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials, 
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
