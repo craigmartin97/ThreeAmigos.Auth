@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using ThAmCo.Auth.Helpers;
 
 namespace ThAmCo.Auth.Data.Account
 {
@@ -17,17 +18,59 @@ namespace ThAmCo.Auth.Data.Account
                 return;
             }
 
+            RandomWordsGenerator fn = new RandomWordsGenerator("https://raw.githubusercontent.com/dominictarr/random-name/master/first-names.txt");
+            RandomWordsGenerator ln = new RandomWordsGenerator("https://raw.githubusercontent.com/arineng/arincli/master/lib/last-names.txt");
+            RandomStringGenerator phone = new RandomStringGenerator();
+
             var userManager = services.GetRequiredService<UserManager<AppUser>>();
+            Random random = new Random();
+            string[] levels = new string[]
+            {
+                "Admin",
+                "Staff",
+                "Customer"
+            };
+
+            for (int i = 0; i < 500; i++)
+            {
+                string role = levels[random.Next(levels.Length)];
+
+                string firstName = fn.GetWord();
+                string lastName = ln.GetWord();
+
+
+                AppUser user = new AppUser()
+                {
+                    Email = firstName + lastName + "@example.com",
+                    UserName = firstName + lastName + "@example.com",
+                    FullName = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(firstName)
+                    + " " +
+                    System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(lastName),
+                    PhoneNumber = role.Equals("Admin") || role.Equals("Staff") ?
+                    "07" + phone.GenerateRandomString(9, "0123456789") : null
+                };
+
+                await userManager.CreateAsync(user, ".Password123");
+                // auto confirm email addresses for test users
+                var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                await userManager.ConfirmEmailAsync(user, token);
+
+
+                await userManager.AddToRoleAsync(user, role);
+            }
+
 
             AppUser[] users = {
-                new AppUser { UserName = "admin@example.com", Email = "admin@example.com", FullName = "Example Admin User" },
-                new AppUser { UserName = "staff@example.com", Email = "staff@example.com", FullName = "Example Staff User" },
-                new AppUser { UserName = "bob@example.com", Email = "bob@example.com", FullName = "Robert 'Bobby' Robertson" },
-                new AppUser { UserName = "betty@example.com", Email = "betty@example.com", FullName = "Bethany 'Betty' Roberts"  }
-            };
+                    new AppUser { UserName = "admin@example.com", Email = "admin@example.com", FullName = "Example Admin User",
+                    PhoneNumber = "07" + phone.GenerateRandomString(9, "0123456789") },
+                    new AppUser { UserName = "staff@example.com", Email = "staff@example.com", FullName = "Example Staff User",
+                    PhoneNumber = "07" + phone.GenerateRandomString(9, "0123456789")},
+                    new AppUser { UserName = "bob@example.com", Email = "bob@example.com", FullName = "Robert 'Bobby' Robertson" },
+                    new AppUser { UserName = "betty@example.com", Email = "betty@example.com", FullName = "Bethany 'Betty' Roberts"  }
+                };
             foreach (var user in users)
             {
-                await userManager.CreateAsync(user, "Password1_");
+                await userManager.CreateAsync(user, ".Password123");
                 // auto confirm email addresses for test users
                 var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 await userManager.ConfirmEmailAsync(user, token);

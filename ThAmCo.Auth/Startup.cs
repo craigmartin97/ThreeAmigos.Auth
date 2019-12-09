@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,12 +14,29 @@ namespace ThAmCo.Auth
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         private IConfiguration Configuration { get; }
+
+        private IHostingEnvironment env;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+        {
+            env = hostingEnvironment;
+            Configuration = configuration;
+
+            var b = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath);
+            if (hostingEnvironment.IsDevelopment()) // use local db
+            {
+                b.AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json",
+                    optional: false, reloadOnChange: true);
+                Configuration = b.Build();
+            }
+            else if (hostingEnvironment.IsStaging()) // if staging, so debuging live db
+            {
+                b.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddUserSecrets<Startup>();
+                Configuration = b.Build();
+            }
+        }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -27,6 +45,8 @@ namespace ThAmCo.Auth
                 Configuration.GetConnectionString("AccountConnection"),
                 x => x.MigrationsHistoryTable("__EFMigrationsHistory", "account")
             ));
+
+            var s = Configuration.GetConnectionString("AccountConnection");
 
             // configure Identity account management
             services.AddIdentity<AppUser, AppRole>()
@@ -61,17 +81,26 @@ namespace ThAmCo.Auth
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
+            // if development or staging then use localhost else use live server.
+            string authority = env.IsDevelopment() || env.IsStaging() ? "https://localhost:44387" :
+                "https://threeamigosauth.azurewebsites.net";
+
             services.AddAuthentication()
                     .AddJwtBearer("thamco_account_api", options =>
                     {
                         options.Audience = "thamco_account_api";
-                        options.Authority = "https://localhost:44387/";
+                        options.Authority = authority;
+                        options.RequireHttpsMetadata = false;
                     });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // configure IdentityServer (provides OpenId Connect and OAuth2)
-            services.AddIdentityServer()
+            services.AddIdentityServer(options =>
+                    {
+                        options.IssuerUri = authority;
+                        options.PublicOrigin = authority;
+                    })
                     .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
                     .AddInMemoryApiResources(Configuration.GetIdentityApis())
                     .AddInMemoryClients(Configuration.GetIdentityClients())
@@ -99,9 +128,18 @@ namespace ThAmCo.Auth
             app.UseCookiePolicy();
             app.UseAuthentication();
 
+            var forwardOptions = new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+                RequireHeaderSymmetry = false
+            };
+            forwardOptions.KnownNetworks.Clear();
+            forwardOptions.KnownProxies.Clear();
+            app.UseForwardedHeaders(forwardOptions);
+
             // use IdentityServer middleware during HTTP requests
             app.UseIdentityServer();
-            
+
             app.UseMvc();
         }
     }

@@ -199,19 +199,27 @@ namespace ThAmCo.Auth.Data.Account.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "d3864a4f-1607-4c2f-8360-833047575c1b",
-                            ConcurrencyStamp = "28cc5c9f-90b9-44c3-9450-5dd0335d7bc7",
+                            Id = "e8d608f3-d5e4-4beb-8522-82c8123e571a",
+                            ConcurrencyStamp = "9f90a409-ebcd-43f9-9597-72cdbb5b9732",
                             Name = "Admin",
                             NormalizedName = "ADMIN",
                             Descriptor = "ThAmCo Administrators"
                         },
                         new
                         {
-                            Id = "56b4ca14-43a0-4281-b5b7-6e73e400cf82",
-                            ConcurrencyStamp = "438580ab-bb4a-4f5c-bb00-49729fef9966",
+                            Id = "d6a52205-7208-492f-8962-579b59da59a5",
+                            ConcurrencyStamp = "f972cf81-d09c-4a94-b224-eb02a36111f1",
                             Name = "Staff",
                             NormalizedName = "STAFF",
                             Descriptor = "ThAmCo Staff Members"
+                        },
+                        new
+                        {
+                            Id = "27b18343-ec51-406e-b529-a46c236c0a7a",
+                            ConcurrencyStamp = "aee2b18a-e224-4a0e-9c78-d37bc825ba66",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER",
+                            Descriptor = "ThAmCo Customers"
                         });
                 });
 

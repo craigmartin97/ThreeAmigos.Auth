@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -19,19 +20,24 @@ namespace ThAmCo.Auth
             {
                 var services = scope.ServiceProvider;
                 var env = services.GetRequiredService<IHostingEnvironment>();
-                if (env.IsDevelopment())
+
+                var context = services.GetRequiredService<AccountDbContext>();
+
+                if (env.IsDevelopment()) // if dev, delete the database as its on localdb
                 {
-                    var context = services.GetRequiredService<AccountDbContext>();
-                    context.Database.Migrate();
-                    try
-                    {
-                        AccountDbInitialiser.SeedTestData(context, services).Wait();
-                    }
-                    catch (Exception)
-                    {
-                        var logger = services.GetRequiredService<ILogger<Program>>();
-                        logger.LogDebug("Seeding test account data failed.");
-                    }
+                    context.Database.EnsureDeleted(); // delete the database each time and refresh data.
+                }
+
+                context.Database.Migrate();
+                try
+                {
+                    AccountDbInitialiser.SeedTestData(context, services).Wait();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message + "  " + ex.InnerException);
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+                    logger.LogDebug("Seeding test account data failed.");
                 }
             }
 

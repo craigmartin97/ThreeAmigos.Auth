@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using ThAmCo.Auth.Data.Account;
 using ThAmCo.Auth.Models;
 
@@ -24,15 +22,27 @@ namespace ThAmCo.Auth.Controllers
         }
 
         [HttpGet("api/users")]
-        public async Task<IActionResult> GetUsers([FromQuery] string role = null)
+        public async Task<IActionResult> GetUsers([FromQuery] string[] roles = null)
         {
-            var users = string.IsNullOrEmpty(role) ? UserManager.Users.ToList()
-                                                   : await UserManager.GetUsersInRoleAsync(role);
+            List<AppUser> users = new List<AppUser>();
+            if ((roles != null) && roles.Count() > 0)
+            {
+                foreach (string role in roles)
+                {
+                    users.AddRange(await UserManager.GetUsersInRoleAsync(role));
+                }
+            }
+            else
+            {
+                users = UserManager.Users.ToList();
+            }
+
             var dto = users.Select(u => new UserSummaryGetDto
             {
                 Id = u.Id,
                 UserName = u.UserName,
                 Email = u.Email,
+                PhoneNumber = u.PhoneNumber, // Added Craig Martin
                 FullName = u.FullName
             });
             return Ok(dto);
@@ -59,6 +69,7 @@ namespace ThAmCo.Auth.Controllers
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber, // Added Craig Martin
                 FullName = user.FullName,
                 Roles = roles
             };
@@ -78,7 +89,8 @@ namespace ThAmCo.Auth.Controllers
             {
                 Email = newUser.Email,
                 FullName = newUser.FullName,
-                UserName = newUser.Email
+                UserName = newUser.Email,
+                PhoneNumber = newUser.PhoneNumber // Craig Martin - Added phone number
             };
 
             var result = await UserManager.CreateAsync(user, newUser.Password);
@@ -97,6 +109,7 @@ namespace ThAmCo.Auth.Controllers
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber, // Craig Martin - Added phone number
                 FullName = user.FullName,
                 Roles = roles
             };
@@ -143,6 +156,10 @@ namespace ThAmCo.Auth.Controllers
             }
 
             user.Email = updatedUser.Email ?? user.Email;
+            // Craig Martin 04-12-19 -- Altering username on update, and phone number
+            user.UserName = updatedUser.Email ?? user.Email;
+            user.PhoneNumber = updatedUser.PhoneNumber ?? user.PhoneNumber;
+
             user.FullName = updatedUser.FullName ?? user.FullName;
 
             await UserManager.UpdateAsync(user);
@@ -168,6 +185,7 @@ namespace ThAmCo.Auth.Controllers
                 Id = user.Id,
                 UserName = user.UserName,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
                 FullName = user.FullName,
                 Roles = roles
             };
