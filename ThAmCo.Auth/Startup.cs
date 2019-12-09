@@ -98,6 +98,7 @@ namespace ThAmCo.Auth
             services.AddIdentityServer(options =>
                     {
                         options.IssuerUri = authority;
+                        options.PublicOrigin = authority;
                     })
                     .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
                     .AddInMemoryApiResources(Configuration.GetIdentityApis())
