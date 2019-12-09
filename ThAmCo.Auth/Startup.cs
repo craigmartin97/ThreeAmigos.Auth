@@ -95,7 +95,10 @@ namespace ThAmCo.Auth
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             // configure IdentityServer (provides OpenId Connect and OAuth2)
-            services.AddIdentityServer()
+            services.AddIdentityServer(options =>
+                    {
+                        options.IssuerUri = authority;
+                    })
                     .AddInMemoryIdentityResources(Configuration.GetIdentityResources())
                     .AddInMemoryApiResources(Configuration.GetIdentityApis())
                     .AddInMemoryClients(Configuration.GetIdentityClients())
@@ -118,7 +121,7 @@ namespace ThAmCo.Auth
                 app.UseHsts();
             }
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
