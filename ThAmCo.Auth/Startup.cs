@@ -89,6 +89,7 @@ namespace ThAmCo.Auth
                     {
                         options.Audience = "thamco_account_api";
                         options.Authority = authority;
+                        options.RequireHttpsMetadata = false;
                     });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
