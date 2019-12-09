@@ -81,8 +81,8 @@ namespace ThAmCo.Auth
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             // if development or staging then use localhost else use live server.
-            string authority = env.IsDevelopment() || env.IsStaging() ? "https://localhost:44387/" :
-                "https://threeamigosauth.azurewebsites.net/";
+            string authority = env.IsDevelopment() || env.IsStaging() ? "https://localhost:44387" :
+                "https://threeamigosauth.azurewebsites.net";
 
             services.AddAuthentication()
                     .AddJwtBearer("thamco_account_api", options =>
