@@ -27,13 +27,7 @@ namespace ThAmCo.Auth
             if (hostingEnvironment.IsDevelopment()) // use local db
             {
                 b.AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json",
-                    optional: false, reloadOnChange: true);
-                Configuration = b.Build();
-            }
-            else if (hostingEnvironment.IsStaging()) // if staging, so debuging live db
-            {
-                b.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .AddUserSecrets<Startup>();
+                    optional: false, reloadOnChange: true).AddUserSecrets<Startup>();
                 Configuration = b.Build();
             }
         }
@@ -46,8 +40,6 @@ namespace ThAmCo.Auth
                 x => x.MigrationsHistoryTable("__EFMigrationsHistory", "account")
             ));
 
-            var s = Configuration.GetConnectionString("AccountConnection");
-
             // configure Identity account management
             services.AddIdentity<AppUser, AppRole>()
                     .AddEntityFrameworkStores<AccountDbContext>()
@@ -55,6 +47,10 @@ namespace ThAmCo.Auth
 
             // add bespoke factory to translate our AppUser into claims
             services.AddScoped<IUserClaimsPrincipalFactory<AppUser>, AppClaimsPrincipalFactory>();
+
+            // CRAIG MARTIN
+            // Add singleton configuration to access username and password for smtp server
+            services.AddSingleton(Configuration);
 
             // configure Identity security options
             services.Configure<IdentityOptions>(options =>
@@ -76,7 +72,7 @@ namespace ThAmCo.Auth
                 options.User.RequireUniqueEmail = true;
 
                 // Sign-in settings
-                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedEmail = true; //false;
             });
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
