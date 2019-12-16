@@ -2,8 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using ThAmCo.Auth.Data.Account;
 using ThAmCo.Auth.Models;
@@ -14,16 +18,20 @@ namespace ThAmCo.Auth.Controllers
     [Authorize(AuthenticationSchemes = "thamco_account_api")]
     public class UsersController : ControllerBase
     {
+        private readonly IConfiguration configuration;
+
         private UserManager<AppUser> UserManager { get; }
 
-        public UsersController(UserManager<AppUser> userManager)
+        public UsersController(UserManager<AppUser> userManager, IConfiguration configuration)
         {
             UserManager = userManager;
+            this.configuration = configuration;
         }
 
         [HttpGet("api/users")]
         public async Task<IActionResult> GetUsers([FromQuery] string[] roles = null)
         {
+            // CRAIG MARTIN - Change to allow multiple job roles in search. Not just one.
             List<AppUser> users = new List<AppUser>();
             if ((roles != null) && roles.Count() > 0)
             {
@@ -98,6 +106,9 @@ namespace ThAmCo.Auth.Controllers
             {
                 return BadRequest();
             }
+
+            // CRAIG MARTIN - Generate email confirmation token
+            await SendEmail(user);
 
             user = await UserManager.FindByEmailAsync(newUser.Email);
             await UserManager.AddToRolesAsync(user, newUser.Roles);
@@ -191,6 +202,69 @@ namespace ThAmCo.Auth.Controllers
             };
 
             return Ok(dto);
+        }
+
+        // CRAIG MARTINNN - Confirm Email
+        [HttpGet("api/users/confirmemail/{userId}"), AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest();
+            }
+
+            var user = await UserManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound();
+            else
+            {
+                var result = await UserManager.ConfirmEmailAsync(user, token);
+                if (result.Succeeded)
+                {
+                    return Ok();
+                }
+            }
+
+            return BadRequest();
+        }
+
+        /// <summary>
+        /// Send an email to the given email addres for confirmation
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        private async Task SendEmail(AppUser user)
+        {
+            try
+            {
+                string token = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+                string confirmationLink = Url.Action("ConfirmEmail", "Users", new
+                {
+                    userId = user.Id,
+                    token = token
+                },
+                Request.Scheme);
+
+                string email = configuration["Email"];
+
+                MailMessage message = new MailMessage();
+                message.From = new MailAddress(email);
+                message.To.Add(user.Email);
+                message.Subject = "ThreeAmigos -- Confirm Email";
+                message.Body = confirmationLink;
+
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                smtp.Credentials = new System.Net.NetworkCredential
+                (email,
+                 configuration["Pass"]);
+                smtp.EnableSsl = true;
+
+                smtp.Send(message);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 }
