@@ -108,7 +108,17 @@ namespace ThAmCo.Auth.Controllers
             }
 
             // CRAIG MARTIN - Generate email confirmation token
-            await SendEmail(user);
+            string token = await UserManager.GenerateEmailConfirmationTokenAsync(user);
+            string confirmationLink = Url.Action("ConfirmEmail", "EmailConfirmation", new
+            {
+                userId = user.Id,
+                token = token
+            },
+            Request.Scheme);
+
+            //Send email with confirmationn link.
+            EmailSender emailSender = new EmailSender();
+            emailSender.SendEmail(user, configuration, confirmationLink, "Three Amigos -- Confirm Email");
 
             user = await UserManager.FindByEmailAsync(newUser.Email);
             await UserManager.AddToRolesAsync(user, newUser.Roles);
@@ -149,6 +159,34 @@ namespace ThAmCo.Auth.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpPost("api/users/resetpassword"), AllowAnonymous]
+        public async Task<IActionResult> SendResetPasswordToken([FromBody] string email)
+        {
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                var user = await UserManager.FindByEmailAsync(email);
+                if (user != null)
+                {
+                    string token = await UserManager.GeneratePasswordResetTokenAsync(user);
+                    string confirmationLink = Url.Action("ResetPassword", "ResetPassword", new
+                    {
+                        token = token,
+                        email = user.Email
+                    },
+                    Request.Scheme);
+
+                    // Send token
+                    EmailSender emailSender = new EmailSender();
+                    emailSender.SendEmail(user, configuration, confirmationLink, "Three Amigos -- Change Password");
+
+                    return Ok();
+                }
+                return NotFound();
+            }
+
+            return BadRequest();
         }
 
         [HttpPut("api/users/{userId}")]
@@ -202,69 +240,6 @@ namespace ThAmCo.Auth.Controllers
             };
 
             return Ok(dto);
-        }
-
-        // CRAIG MARTINNN - Confirm Email
-        [HttpGet("api/users/confirmemail/{userId}"), AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)
-        {
-            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token))
-            {
-                return BadRequest();
-            }
-
-            var user = await UserManager.FindByIdAsync(userId);
-            if (user == null)
-                return NotFound();
-            else
-            {
-                var result = await UserManager.ConfirmEmailAsync(user, token);
-                if (result.Succeeded)
-                {
-                    return Ok();
-                }
-            }
-
-            return BadRequest();
-        }
-
-        /// <summary>
-        /// Send an email to the given email addres for confirmation
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
-        private async Task SendEmail(AppUser user)
-        {
-            try
-            {
-                string token = await UserManager.GenerateEmailConfirmationTokenAsync(user);
-                string confirmationLink = Url.Action("ConfirmEmail", "Users", new
-                {
-                    userId = user.Id,
-                    token = token
-                },
-                Request.Scheme);
-
-                string email = configuration["Email"];
-
-                MailMessage message = new MailMessage();
-                message.From = new MailAddress(email);
-                message.To.Add(user.Email);
-                message.Subject = "ThreeAmigos -- Confirm Email";
-                message.Body = confirmationLink;
-
-                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
-                smtp.Credentials = new System.Net.NetworkCredential
-                (email,
-                 configuration["Pass"]);
-                smtp.EnableSsl = true;
-
-                smtp.Send(message);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
         }
     }
 }

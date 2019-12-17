@@ -86,3 +86,6 @@ E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\
 E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.dll
 E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.pdb
 E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.csproj.CopyComplete
+E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\EmailConfirmation\ConfirmEmail.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPassword.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPasswordConfirmation.cshtml.g.cs
