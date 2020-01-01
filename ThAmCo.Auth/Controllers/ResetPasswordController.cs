@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Threading.Tasks;
 using ThAmCo.Auth.Data.Account;
 using ThAmCo.Auth.Models;
 
@@ -14,12 +12,43 @@ namespace ThAmCo.Auth.Controllers
     {
         private UserManager<AppUser> UserManager { get; }
 
-        public ResetPasswordController(UserManager<AppUser> userManager)
+        private readonly IConfiguration configuration;
+
+        public ResetPasswordController(UserManager<AppUser> userManager, IConfiguration configuration)
         {
             UserManager = userManager;
+            this.configuration = configuration;
         }
 
-        [HttpGet("api/ResetPassword"), AllowAnonymous]
+        [HttpPost("api/sendresetrequest"), AllowAnonymous] //api/users/resetpassword
+        public async Task<IActionResult> SendResetPasswordToken([FromBody] string email)
+        {
+            if (!string.IsNullOrWhiteSpace(email))
+            {
+                var user = await UserManager.FindByEmailAsync(email);
+                if (user != null)
+                {
+                    string token = await UserManager.GeneratePasswordResetTokenAsync(user);
+                    string confirmationLink = Url.Action("ResetPassword", "ResetPassword", new
+                    {
+                        token = token,
+                        email = user.Email
+                    },
+                    Request.Scheme);
+
+                    // Send token
+                    EmailSender emailSender = new EmailSender();
+                    emailSender.SendEmail(user, configuration, confirmationLink, "Three Amigos -- Change Password");
+
+                    return Ok();
+                }
+                return NotFound();
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet("api/resetpassword"), AllowAnonymous] //ResetPassword
         public IActionResult ResetPassword(string token, string email)
         {
             if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(email))
@@ -28,7 +57,7 @@ namespace ThAmCo.Auth.Controllers
             return View();
         }
 
-        [HttpPost("api/ResetPassword"), AllowAnonymous]
+        [HttpPost("api/resetpassword"), AllowAnonymous] //ResetPassword
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel viewModel)
         {
             if (ModelState.IsValid)

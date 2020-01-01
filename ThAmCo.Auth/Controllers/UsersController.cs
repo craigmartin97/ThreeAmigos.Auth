@@ -161,34 +161,6 @@ namespace ThAmCo.Auth.Controllers
             return Ok();
         }
 
-        [HttpPost("api/users/resetpassword"), AllowAnonymous]
-        public async Task<IActionResult> SendResetPasswordToken([FromBody] string email)
-        {
-            if (!string.IsNullOrWhiteSpace(email))
-            {
-                var user = await UserManager.FindByEmailAsync(email);
-                if (user != null)
-                {
-                    string token = await UserManager.GeneratePasswordResetTokenAsync(user);
-                    string confirmationLink = Url.Action("ResetPassword", "ResetPassword", new
-                    {
-                        token = token,
-                        email = user.Email
-                    },
-                    Request.Scheme);
-
-                    // Send token
-                    EmailSender emailSender = new EmailSender();
-                    emailSender.SendEmail(user, configuration, confirmationLink, "Three Amigos -- Change Password");
-
-                    return Ok();
-                }
-                return NotFound();
-            }
-
-            return BadRequest();
-        }
-
         [HttpPut("api/users/{userId}")]
         public async Task<IActionResult> UpdateUser([FromRoute] string userId,
                                                     [FromBody] UserPutDto updatedUser)

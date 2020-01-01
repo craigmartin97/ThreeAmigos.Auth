@@ -71,7 +71,8 @@ namespace ThAmCo.Auth
                         "staff_api",
                         "roles"
                     },
-                    RequireConsent = false
+                    RequireConsent = false,
+                    AllowOfflineAccess = true // added to test refresh token 23/12/19
                 }
             };
         }
