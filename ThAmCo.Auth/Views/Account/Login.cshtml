@@ -1,0 +1,54 @@
+﻿@model ThAmCo.Auth.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<hr />
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Login">
+                @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div>
+                    <label asp-for="RememberMe" class="control-label" style="margin-right:10px;"></label>
+                    @Html.CheckBoxFor(x => x.RememberMe, new { style = "transform:scale(1.3)" })
+                </div>
+
+                <div>
+                    @Html.ActionLink("Reset Password?", "ResetPassword", "Account")
+                </div>
+
+                <hr />
+
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <tr>
+        <td>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </td>
+    </tr>
+}
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
