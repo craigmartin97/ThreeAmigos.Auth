@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\s6012976\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj": {}
+    "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj": {}
   },
   "projects": {
-    "C:\\Users\\s6012976\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj": {
+    "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s6012976\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj",
+        "projectUniqueName": "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj",
         "projectName": "ThAmCo.Auth",
-        "projectPath": "C:\\Users\\s6012976\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj",
-        "packagesPath": "C:\\Users\\s6012976\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s6012976\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\obj\\",
+        "projectPath": "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj",
+        "packagesPath": "C:\\Users\\q5031372\\.nuget\\packages\\",
+        "outputPath": "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\s6012976\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\q5031372\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
