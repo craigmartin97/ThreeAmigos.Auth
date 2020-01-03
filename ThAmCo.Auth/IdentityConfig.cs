@@ -73,6 +73,25 @@ namespace ThAmCo.Auth
                     },
                     RequireConsent = false,
                     AllowOfflineAccess = true // added to test refresh token 23/12/19
+                },
+                new Client
+                {
+                    ClientId = "mvc",
+                    ClientName = "MVC Client",
+                    AllowedGrantTypes = GrantTypes.Implicit,
+
+                    // where to redirect to after login
+                    RedirectUris = { "https://localhost:44373/signin-oidc" },
+
+                    // where to redirect to after logout
+                    PostLogoutRedirectUris = { "https://localhost:44373/signout-callback-oidc" },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "roles"
+                    },
+                    RequireConsent = false,
                 }
             };
         }

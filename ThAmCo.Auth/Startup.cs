@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using IdentityModel.Client;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using ThAmCo.Auth.Data.Account;
+using ThAmCo.Auth.Service;
 
 namespace ThAmCo.Auth
 {
@@ -87,7 +90,8 @@ namespace ThAmCo.Auth
                         options.Audience = "thamco_account_api";
                         options.Authority = authority;
                         options.RequireHttpsMetadata = false;
-                    });
+                    })
+                    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -104,6 +108,26 @@ namespace ThAmCo.Auth
                     .AddDeveloperSigningCredential();
             // TODO: developer signing cert above should be replaced with a real one
             // TODO: should use AddOperationalStore to persist tokens between app executions
+
+            // get auth url
+            string baseAuthAddress = Configuration["AuthURL"];
+
+            // inject http clients, using named instance
+            // authentication injection
+            services.AddHttpClient<IAuth, AuthService>("auth", c =>
+            {
+                c.BaseAddress = new Uri(baseAuthAddress);
+                c.DefaultRequestHeaders.Accept.Clear();
+                c.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+            });
+
+            //setup auth http client
+            services.AddSingleton(new ClientCredentialsTokenRequest
+            {
+                Address = baseAuthAddress + "/connect/token",
+                ClientId = "threeamigos_app",
+                ClientSecret = "secret"
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
