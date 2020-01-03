@@ -20,7 +20,13 @@ namespace ThAmCo.Auth.Helpers
         {
             using (var wc = new WebClient())
             {
-                string file = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Xml/temp.txt";
+                string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "/Xml/";
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+
+                string file = folder + "temp.txt";
                 wc.DownloadFile(url, file);
                 using (StreamReader streamReader = new StreamReader(file))
                 {
