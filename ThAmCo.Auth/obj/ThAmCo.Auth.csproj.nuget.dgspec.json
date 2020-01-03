@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj": {}
+    "C:\\Users\\q5031372\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj": {}
   },
   "projects": {
-    "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj": {
+    "C:\\Users\\q5031372\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj",
+        "projectUniqueName": "C:\\Users\\q5031372\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj",
         "projectName": "ThAmCo.Auth",
-        "projectPath": "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj",
-        "packagesPath": "C:\\Users\\Craig Martin\\.nuget\\packages\\",
-        "outputPath": "E:\\University\\Year Three\\CloudSystemDevOps\\ICA\\ThreeAmigos.Auth\\ThAmCo.Auth\\obj\\",
+        "projectPath": "C:\\Users\\q5031372\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\ThAmCo.Auth.csproj",
+        "packagesPath": "C:\\Users\\q5031372\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\q5031372\\Desktop\\ThreeAmigos.Auth\\ThAmCo.Auth\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Craig Martin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\q5031372\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -78,16 +78,10 @@
             }
           },
           "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
+            "net461"
           ],
           "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+          "warn": true
         }
       }
     }
