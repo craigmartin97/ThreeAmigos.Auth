@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ThAmCo.Auth.Data.Account;
 using ThAmCo.Auth.Models;
 using ThAmCo.Auth.Service;
 
@@ -15,6 +17,7 @@ namespace ThAmCo.Auth.Controllers
     public class AccountController : Controller
     {
         private readonly IAuth _auth;
+
         public AccountController(IAuth auth)
         {
             _auth = auth;

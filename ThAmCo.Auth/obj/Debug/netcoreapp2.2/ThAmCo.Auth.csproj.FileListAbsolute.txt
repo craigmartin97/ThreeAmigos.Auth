@@ -90,3 +90,35 @@ E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\
 E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPassword.cshtml.g.cs
 E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPasswordConfirmation.cshtml.g.cs
 E:\University\Year Three\CloudSystemDevOps\ICA\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.deps.json
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.runtimeconfig.json
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.runtimeconfig.dev.json
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.dll
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.pdb
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.Views.dll
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.Views.pdb
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.csprojAssemblyReference.cache
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.csproj.CoreCompileInputs.cache
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorAssemblyInfo.cache
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorAssemblyInfo.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.AssemblyInfoInputs.cache
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.AssemblyInfo.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.TagHelpers.input.cache
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.TagHelpers.output.cache
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorCoreGenerate.cache
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Account\Login.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\EmailConfirmation\ConfirmEmail.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPassword.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPasswordConfirmation.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.g.cshtml.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorTargetAssemblyInfo.cache
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorTargetAssemblyInfo.cs
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.Views.pdb
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.dll
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.pdb
+C:\Users\s6012976\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.csproj.CopyComplete

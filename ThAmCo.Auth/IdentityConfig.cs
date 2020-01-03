@@ -89,7 +89,8 @@ namespace ThAmCo.Auth
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "roles"
+                        "roles",
+                        "staff_api" // <---- Add staff api as scope
                     },
                     RequireConsent = false,
                 }

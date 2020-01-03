@@ -84,7 +84,24 @@ namespace ThAmCo.Auth
             string authority = env.IsDevelopment() || env.IsStaging() ? "https://localhost:44387" :
                 "https://threeamigosauth.azurewebsites.net";
 
-            services.AddAuthentication()
+            // add authorizaation polices
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Staff", builder =>
+                {
+                    builder.RequireClaim("role", "Staff", "Admin"); // only staff and admin
+                });
+                options.AddPolicy("Admin", builder =>
+                {
+                    builder.RequireClaim("role", "Admin"); // only admin
+                });
+            });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
                     .AddJwtBearer("thamco_account_api", options =>
                     {
                         options.Audience = "thamco_account_api";
