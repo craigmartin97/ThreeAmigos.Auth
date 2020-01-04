@@ -31,7 +31,7 @@ namespace ThAmCo.Auth.Data.Account
                 "Customer"
             };
 
-            for (int i = 0; i < 500; i++)
+            for (int i = 0; i < 100; i++)
             {
                 string role = levels[random.Next(levels.Length)];
 

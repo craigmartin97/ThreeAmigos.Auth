@@ -45,15 +45,31 @@ namespace ThAmCo.Auth.Controllers
                 users = UserManager.Users.ToList();
             }
 
-            var dto = users.Select(u => new UserSummaryGetDto
+            //var dto = users.Select(u => new UserSummaryGetDto
+            //{
+            //    Id = u.Id,
+            //    UserName = u.UserName,
+            //    Email = u.Email,
+            //    PhoneNumber = u.PhoneNumber, // Added Craig Martin
+            //    FullName = u.FullName
+            //});
+
+            IList<UserSummaryGetDto> usersDto = new List<UserSummaryGetDto>();
+            foreach(var u in users)
             {
-                Id = u.Id,
-                UserName = u.UserName,
-                Email = u.Email,
-                PhoneNumber = u.PhoneNumber, // Added Craig Martin
-                FullName = u.FullName
-            });
-            return Ok(dto);
+                UserSummaryGetDto dto1 = new UserSummaryGetDto
+                {
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    Email = u.Email,
+                    PhoneNumber = u.PhoneNumber, // Added Craig Martin
+                    FullName = u.FullName,
+                    Roles = await UserManager.GetRolesAsync(u)
+                };
+
+                usersDto.Add(dto1);
+            }
+            return Ok(usersDto);
         }
 
         [HttpGet("api/users/{userId}")]
