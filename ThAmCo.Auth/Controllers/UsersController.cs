@@ -93,6 +93,12 @@ namespace ThAmCo.Auth.Controllers
                 return BadRequest();
             }
 
+            // CRAIG MARTIN - check if the phone number is already in the system, if so then BadRequest
+            if (UserManager.Users.Any(x => x.PhoneNumber.Equals(newUser.PhoneNumber)))
+            {
+                return BadRequest();
+            }
+
             var user = new AppUser
             {
                 Email = newUser.Email,
@@ -161,6 +167,27 @@ namespace ThAmCo.Auth.Controllers
             return Ok();
         }
 
+        [HttpPost("api/users/deleteuser")]
+        public async Task<IActionResult> DeleteUser([FromBody] string email = null)
+        {
+            if (string.IsNullOrEmpty(email))
+            {
+                return BadRequest();
+            }
+
+            var user = await UserManager.FindByEmailAsync(email);
+            if (user == null)
+                return NotFound();
+
+            var result = await UserManager.DeleteAsync(user);
+            if (!result.Succeeded)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+            return Ok();
+        }
+
         [HttpPut("api/users/{userId}")]
         public async Task<IActionResult> UpdateUser([FromRoute] string userId,
                                                     [FromBody] UserPutDto updatedUser)
@@ -174,6 +201,22 @@ namespace ThAmCo.Auth.Controllers
             if (user == null)
             {
                 return NotFound();
+            }
+
+
+            foreach (var tUser in UserManager.Users) // for all users
+            {
+                if (tUser.Id != user.Id) // not the same user
+                {
+                    // tUser no number, skip
+                    if (tUser.PhoneNumber == null)
+                        continue;
+
+                    // if the user has the same phone number as the request update to the current user then badrequest
+                    // as two members cannot have the same number in this system.
+                    if (tUser.PhoneNumber.Equals(updatedUser.PhoneNumber))
+                        return BadRequest();
+                }
             }
 
             user.Email = updatedUser.Email ?? user.Email;

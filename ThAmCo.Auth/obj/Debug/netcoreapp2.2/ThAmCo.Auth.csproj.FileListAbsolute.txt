@@ -124,3 +124,37 @@ C:\Users\q5031372\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\R
 C:\Users\q5031372\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\EmailConfirmation\ConfirmEmail.g.cshtml.cs
 C:\Users\q5031372\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPassword.g.cshtml.cs
 C:\Users\q5031372\Desktop\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPasswordConfirmation.g.cshtml.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\appsettings.Development.json
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\appsettings.json
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.deps.json
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.runtimeconfig.json
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.runtimeconfig.dev.json
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.dll
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.pdb
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.Views.dll
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\bin\Debug\netcoreapp2.2\ThAmCo.Auth.Views.pdb
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.csprojAssemblyReference.cache
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorAssemblyInfo.cache
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorAssemblyInfo.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.AssemblyInfoInputs.cache
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.AssemblyInfo.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.TagHelpers.input.cache
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.TagHelpers.output.cache
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorCoreGenerate.cache
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Account\Login.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\EmailConfirmation\ConfirmEmail.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPassword.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\ResetPassword\ResetPasswordConfirmation.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.cshtml.g.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorTargetAssemblyInfo.cache
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.RazorTargetAssemblyInfo.cs
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.Views.pdb
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.dll
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.pdb
+E:\University\Year Three\CloudSystemDevOps\ICA\Craig\ThreeAmigos.Auth\ThAmCo.Auth\obj\Debug\netcoreapp2.2\ThAmCo.Auth.csproj.CopyComplete
