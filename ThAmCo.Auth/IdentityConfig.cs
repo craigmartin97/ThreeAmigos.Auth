@@ -78,7 +78,12 @@ namespace ThAmCo.Auth
                 {
                     ClientId = "mvc",
                     ClientName = "MVC Client",
-                    AllowedGrantTypes = GrantTypes.Implicit,
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
 
                     // where to redirect to after login
                     RedirectUris = { "https://localhost:44373/signin-oidc" },
@@ -93,6 +98,7 @@ namespace ThAmCo.Auth
                         "staff_api" // <---- Add staff api as scope
                     },
                     RequireConsent = false,
+                    AllowOfflineAccess = true
                 }
             };
         }

@@ -85,17 +85,17 @@ namespace ThAmCo.Auth
                 "https://threeamigosauth.azurewebsites.net";
 
             // add authorizaation polices
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Staff", builder =>
-                {
-                    builder.RequireClaim("role", "Staff", "Admin"); // only staff and admin
-                });
-                options.AddPolicy("Admin", builder =>
-                {
-                    builder.RequireClaim("role", "Admin"); // only admin
-                });
-            });
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Staff", builder =>
+            //    {
+            //        builder.RequireClaim("role", "Staff", "Admin"); // only staff and admin
+            //    });
+            //    options.AddPolicy("Admin", builder =>
+            //    {
+            //        builder.RequireClaim("role", "Admin"); // only admin
+            //    });
+            //});
 
             services.AddAuthentication(options =>
             {
