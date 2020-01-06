@@ -122,14 +122,11 @@ namespace ThAmCo.Auth
             // TODO: developer signing cert above should be replaced with a real one
             // TODO: should use AddOperationalStore to persist tokens between app executions
 
-            // get auth url
-            string baseAuthAddress = Configuration["AuthURL"];
-
             // inject http clients, using named instance
             // authentication injection
             services.AddHttpClient<IAuth, AuthService>("auth", c =>
             {
-                c.BaseAddress = new Uri(baseAuthAddress);
+                c.BaseAddress = new Uri(authority);
                 c.DefaultRequestHeaders.Accept.Clear();
                 c.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             });
@@ -137,7 +134,7 @@ namespace ThAmCo.Auth
             //setup auth http client
             services.AddSingleton(new ClientCredentialsTokenRequest
             {
-                Address = baseAuthAddress + "/connect/token",
+                Address = authority + "/connect/token",
                 ClientId = "threeamigos_app",
                 ClientSecret = "secret"
             });

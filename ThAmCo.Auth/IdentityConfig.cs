@@ -100,11 +100,10 @@ namespace ThAmCo.Auth
                     RequireConsent = false,
                     AllowOfflineAccess = true
                 }
-                ,
-                new Client
+                ,new Client
                 {
                     ClientId = "livemvc",
-                    ClientName = "Live MVC Client",
+                    ClientName = "MVC Client",
                     AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
 
                     ClientSecrets =
