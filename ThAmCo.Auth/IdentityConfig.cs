@@ -100,6 +100,33 @@ namespace ThAmCo.Auth
                     RequireConsent = false,
                     AllowOfflineAccess = true
                 }
+                ,
+                new Client
+                {
+                    ClientId = "livemvc",
+                    ClientName = "Live MVC Client",
+                    AllowedGrantTypes = GrantTypes.HybridAndClientCredentials,
+
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+
+                    // where to redirect to after login
+                    RedirectUris = { "https://threeamigosapp.azurewebsites.net/signin-oidc" },
+
+                    // where to redirect to after logout
+                    PostLogoutRedirectUris = { "https://threeamigosapp.azurewebsites.net/signout-callback-oidc" },
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "roles",
+                        "staff_api" // <---- Add staff api as scope
+                    },
+                    RequireConsent = false,
+                    AllowOfflineAccess = true
+                }
             };
         }
     }

@@ -35,7 +35,7 @@ namespace ThAmCo.Auth
              * UserSecrets are used to avoid adding personal details into source controler and its the Microsoft recommneded way.
              */
             var b = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath);
-            if (hostingEnvironment.IsDevelopment()) // use local db
+            if (hostingEnvironment.IsDevelopment())
             {
                 b.AddJsonFile($"appsettings.{hostingEnvironment.EnvironmentName}.json",
                     optional: false, reloadOnChange: true).AddUserSecrets<Startup>();
