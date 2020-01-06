@@ -26,6 +26,14 @@ namespace ThAmCo.Auth
             env = hostingEnvironment;
             Configuration = configuration;
 
+            /**
+             * This is called UserSecrets. 
+             * A folder (f18708ad-8894-465a-994c-3effeb77dc97) with a secret.json file must 
+             * be on the users development machine in order to get an email and password from.
+             * Otherwise, the reset email and confirmation email functionality won't work.
+             * On Azure, the email and password are added as configration settings.
+             * UserSecrets are used to avoid adding personal details into source controler and its the Microsoft recommneded way.
+             */
             var b = new ConfigurationBuilder().SetBasePath(hostingEnvironment.ContentRootPath);
             if (hostingEnvironment.IsDevelopment()) // use local db
             {
@@ -81,21 +89,9 @@ namespace ThAmCo.Auth
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             // if development or staging then use localhost else use live server.
-            string authority = env.IsDevelopment() || env.IsStaging() ? "https://localhost:44387" :
-                "https://threeamigosauth.azurewebsites.net";
-
-            // add authorizaation polices
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("Staff", builder =>
-            //    {
-            //        builder.RequireClaim("role", "Staff", "Admin"); // only staff and admin
-            //    });
-            //    options.AddPolicy("Admin", builder =>
-            //    {
-            //        builder.RequireClaim("role", "Admin"); // only admin
-            //    });
-            //});
+            //string authority = env.IsDevelopment() || env.IsStaging() ? "https://localhost:44387" :
+            //    "https://threeamigosauth.azurewebsites.net";
+            string authority = Configuration["AuthURL"];
 
             services.AddAuthentication(options =>
             {
