@@ -43,18 +43,25 @@ namespace ThAmCo.Auth.Controllers
         {
             if (ModelState.IsValid)
             {
-                SignInAuth response = await _auth.RequestToken(user);
 
-                // set remember me
-                response.AuthenticationProperties.IsPersistent = user.RememberMe;
-                await HttpContext.SignInAsync
-                      (CookieAuthenticationDefaults.AuthenticationScheme,
-                        response.ClaimsPrincipal,
-                        response.AuthenticationProperties
-                      );
-                return Redirect(returnUrl ?? "/");
-
+                try
+                {
+                    SignInAuth response = await _auth.RequestToken(user);
+                    // set remember me
+                    response.AuthenticationProperties.IsPersistent = user.RememberMe;
+                    await HttpContext.SignInAsync
+                          (CookieAuthenticationDefaults.AuthenticationScheme,
+                            response.ClaimsPrincipal,
+                            response.AuthenticationProperties
+                          );
+                    return Redirect(returnUrl ?? "/");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
             }
+
             // add return url back in!!!
             ViewData["ReturnUrl"] = returnUrl;
             ViewBag.ReturnUrl = returnUrl;

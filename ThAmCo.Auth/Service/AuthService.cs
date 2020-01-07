@@ -41,7 +41,7 @@ namespace ThAmCo.Auth.Service
 
             if (passwordToken.IsError)
             {
-                throw new HttpRequestException("Please check your details and try again");
+                throw new HttpRequestException("Unable to sign in with the details provided. Please check your email and password and try again.");
             }
 
             UserInfoResponse response = await _httpClient.GetUserInfoAsync(new UserInfoRequest
@@ -49,6 +49,11 @@ namespace ThAmCo.Auth.Service
                 Address = disco.UserInfoEndpoint,
                 Token = passwordToken.AccessToken
             });
+
+            if(response == null)
+            {
+                throw new NullReferenceException("Unable to get user details. Please try again.");
+            }
 
             ClaimsIdentity claimIdentity = new ClaimsIdentity(response.Claims, CookieAuthenticationDefaults.AuthenticationScheme);
             ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimIdentity);

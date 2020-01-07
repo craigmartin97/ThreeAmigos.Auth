@@ -14,7 +14,7 @@ namespace ThAmCo.Auth.Controllers
         [HttpGet("api/values")]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2","values3","values4","values5" };
+            return new string[] { "value1", "value2","values3","values4","values5","values6" };
         }
     }
 }
